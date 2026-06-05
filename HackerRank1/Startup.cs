@@ -29,6 +29,17 @@ namespace LibraryService.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // CORS Policy
+            services.AddCors(options =>
+            {
+                options.AddPolicy("DevCors", policy =>
+                    policy.SetIsOriginAllowed(_ => true)
+                          .AllowAnyHeader()
+                          .AllowAnyMethod()
+                          .AllowCredentials()
+                );
+            });
+
             // 1. jwtSettings binding
             var jwtSettings = Configuration
                                 .GetSection("JwtSettings")
@@ -104,6 +115,8 @@ namespace LibraryService.WebAPI
 
 
             app.UseRouting();
+
+            app.UseCors("DevCors");
 
             // Agregar los metodos de Auth al Middleware Pipeline.
             app.UseAuthentication();
