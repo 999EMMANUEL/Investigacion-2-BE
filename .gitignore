@@ -26,6 +26,11 @@ Thumbs.db
 # Logs
 *.log
 
-# If you keep secrets or sensitive files, add them here.
-# Example: appsettings.secrets.json
+# Secrets and sensitive config
 appsettings.*.local.json
+appsettings.Development.json
+
+# Publish output and profiles (contain server credentials)
+publish/
+*.PublishSettings
+*.pubxml.user
